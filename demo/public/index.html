@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <style>
+      .demo {
+        padding: 100px;
+        background-color: #DFDFDF;
+      }
+      .box-a {
+        height: 250px;
+        width: 250px;
+        background-color: red;
+        margin: 20px;
+        position: relative;
+        left: 0;
+      }
+      .box-b {
+        position: relative;
+        height: 250px;
+        width: 250px;
+        background-color: blue;
+        margin: 20px;
+        overflow: hidden;
+      }
+      .box-b img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+      }
+      .animated.box-a {
+        will-change: left;
+        transition: left 0.400s cubic-bezier(0.45, 0.25, 0.25, 1);
+      }
+      .animated.box-b {
+        will-change: transform;
+        transition: transform 0.400s cubic-bezier(0.45, 0.25, 0.25, 1);
+      }
+      .box-b.animated-fast, .box-a.animated-fast {
+        /* transition-duration: 500ms;
+        transition-timing-function: cubic-bezier(0.3, 0.25, 0, 1);
+        transform: translate3d(500px, 0, 0) scale(1.01); */
+      }
+      .move.box-b {
+        transform: translate3d(1000px, 0, 0.01px);
+      }
+      .move.box-a {
+        left: 1000px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app-root"></div>
+    <div class="demo-container">
+      <div class="demo">
+        <div class="box-a"></div>
+        <div class="box-b"></div>
+      </div>
+      <div class="control">
+        <button onClick="trigger()" onMouseenter="mouseEnter()">Move</button>
+      </div>
+    </div>
+    <script src="./css-animation-helpers.js"></script>
+    <script>
+      (function() {
+        const boxA = document.querySelector('.box-a');
+        const boxB = document.querySelector('.box-b');
+
+        window.trigger = function() {
+          boxA.classList.add('animated');
+          boxB.classList.add('animated');
+
+          CssAnimationHelpers.beforeCssLayout(function guardalupe() {
+            boxA.classList.add('move');
+            boxB.classList.add('move');
+            // boxA.classList.add('animated-fast');
+            // boxB.classList.add('animated-fast');
+          });
+        }
+
+        // boxA.classList.add('animated-fast');
+        // setTimeout(() => {
+        //   return;
+        //   boxA.classList.add('animated');
+        //   CssAnimationHelpers.beforeCssLayout(function pqp() {
+        //     boxA.classList.add('move');
+        //   });
+        //   // setTimeout(() => {
+        //   //   boxA.classList.remove('animated');
+        //   //   boxA.classList.add('animated-fast');
+        //   // }, 500);
+        //   CssAnimationHelpers.beforeNextCssLayout(() => {
+        //     boxA.getBoundingClientRect();
+        //     CssAnimationHelpers.beforeCssLayout(() => {
+        //       boxA.classList.add('animated-fast');
+        //     })
+        //   });
+        //   // CssAnimationHelpers.beforeNextCssLayout(() => {
+        //   //   CssAnimationHelpers.beforeNextCssLayout(() => {
+        //   //     boxA.classList.add('animated-fast');
+        //   //   });
+        //   // });
+        // }, 1000);
+      })();
+    </script>
+  </body>
+</html>

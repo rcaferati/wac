@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  z-index: 1000;
+  background-color: #FAFAFA;
+  position: fixed;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    display: block;
+    color: #FFFFFF;
+    margin: 0 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
+
+.logo {
+  display: block;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}

@@ -1,0 +1,26 @@
+$speed: 1s;
+$range: 500px;
+
+.container {
+
+}
+
+.box {
+
+}
+
+.animated {
+  transition: left $speed ease-out, transform $speed ease-out;
+}
+
+.boxAFinal {
+  left: $range;
+}
+
+.boxBFinal {
+  transform: translate3d($range, 0, 0);
+}
+
+.initial {
+  left: 0;
+}

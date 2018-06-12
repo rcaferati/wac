@@ -1,0 +1,61 @@
+.container {
+  padding: 20px 10px;
+  background-color: #EFEFEF;
+  margin: 10px 0;
+
+  header {
+    margin-bottom: 20px;
+
+    h3 {
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #4f4f4f;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-size: 26px;
+      font-weight: bold;
+    }
+  }
+}
+
+.example {
+  padding: 20px;
+
+  button {
+    margin: 10px 10px 0 0;
+  }
+}
+
+.boxes {
+  &.animated {
+    .boxA, .boxB {
+      transition: all 5s ease-in-out;
+    }
+  }
+}
+
+.boxA, .boxB {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin-left: 0;
+}
+
+.moveRight {
+  transform: translate3d(500px, 0, 0);
+}
+
+.moveWrong {
+  margin-left: 500px;
+}
+
+.boxA {
+  background-color: red;
+}
+
+.boxB {
+  background-color: blue;
+}

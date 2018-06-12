@@ -1,0 +1,13 @@
+{
+  "presets": ["es2015", "stage-0", "react"],
+  "env": {
+    "production": {
+      "plugins": [
+        [ "css-modules-transform", {
+          "generateScopedName": "[hash:base64:5]",
+          "extensions": [".css", ".scss"],
+        } ]
+      ],
+    }
+  }
+}

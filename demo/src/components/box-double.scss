@@ -1,0 +1,39 @@
+$box-size: 160px;
+
+.container {
+  background-color: #F0F0F0;
+  padding: 20px;
+
+  h2 {
+    font-size: 26px;
+    font-weight: bold;
+  }
+
+  p {
+    margin-top: 12px;
+    margin-bottom: 18px;
+    font-size: 16px;
+  }
+}
+
+.boxA, .boxB {
+  width: $box-size;
+  height: $box-size;
+  background-color: red;
+  position: relative;
+  left: 0;
+  margin-left: 0;
+}
+
+.boxB {
+  margin-top: 10px;
+  background-color: blue;
+}
+
+.triggers {
+  padding: 25px 0;
+
+  button {
+    margin: 0 10px 0 0;
+  }
+}
