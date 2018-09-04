@@ -1,8 +1,9 @@
 $box-size: 160px;
+$padding: 25px;
 
 .container {
   background-color: #F0F0F0;
-  padding: 20px;
+  padding: $padding;
 
   h2 {
     font-size: 26px;
@@ -16,18 +17,39 @@ $box-size: 160px;
   }
 }
 
+.boxes {
+  display: block;
+  position: relative;
+}
+
+.overlap {
+  .track {
+    &:nth-child(2) {
+      transform: translateY(calc(-10px -100%));
+    }
+  }
+}
+
+.track {
+  background-color: rgba(0, 0, 0, 0.035);
+  transition: transform 0.3s ease-out;
+
+  &:nth-child(2) {
+    margin-top: 10px;
+  }
+}
+
 .boxA, .boxB {
   width: $box-size;
   height: $box-size;
-  background-color: red;
+  background-color: ##2881e0;
   position: relative;
   left: 0;
   margin-left: 0;
 }
 
 .boxB {
-  margin-top: 10px;
-  background-color: blue;
+  background-color: red;
 }
 
 .triggers {

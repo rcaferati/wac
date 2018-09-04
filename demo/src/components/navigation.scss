@@ -5,8 +5,9 @@
   padding: 10px;
   width: 100%;
   z-index: 1000;
-  background-color: #FAFAFA;
-  position: fixed;
+  background-color: #FFFFFF;
+  // position: fixed;
+  position: relative;
 }
 
 .wrapper {
@@ -27,7 +28,7 @@
   display: block;
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 125px;
+    height: 125px;
   }
 }

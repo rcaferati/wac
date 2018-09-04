@@ -19,28 +19,74 @@ export default class BoxDouble extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      overlapLabel: 'Overlap',
+      moveLabel: 'Trigger',
+    };
+    this.overlaped = false;
   }
 
-  triggerIt = () => {
+  moveIt = () => {
+    if (this.state.moveLabel === 'Trigger') {
+      this.triggerIt();
+      return;
+    }
+    this.reverseIt();
+  }
+
+  triggerIt() {
+    this.setState({
+      moveLabel: 'Reverse',
+    });
     this.props.trigger({
       boxA: this.boxA,
       boxB: this.boxB,
     });
   }
 
-  reverseIt = () => {
+  reverseIt() {
+    this.setState({
+      moveLabel: 'Trigger',
+    });
     this.props.reverse({
       boxA: this.boxA,
       boxB: this.boxB,
     });
   }
 
+  overlapIt = () => {
+    if (!this.overlaped) {
+      this.overlap();
+      return;
+    }
+    this.split();
+  }
+
   resetIt = () => {
+    this.split();
+    this.setState({
+      moveLabel: 'Trigger',
+    });
     this.props.reset({
       boxA: this.boxA,
       boxB: this.boxB,
     });
+  }
+
+  overlap() {
+    this.setState({
+      overlapLabel: 'Split',
+    });
+    this.boxes.classList.add(styles.overlap);
+    this.overlaped = true;
+  }
+
+  split() {
+    this.setState({
+      overlapLabel: 'Overlap',
+    });
+    this.boxes.classList.remove(styles.overlap);
+    this.overlaped = false;
   }
 
   render() {
@@ -57,36 +103,47 @@ export default class BoxDouble extends React.Component {
             {description && (<p>{description}</p>)}
           </header>
         )}
-        <div className={styles.boxes}>
-          <div
-            ref={(box) => { this.boxA = box; }}
-            className={styles.boxA}
-          />
-          <div
-            ref={(box) => { this.boxB = box; }}
-            className={styles.boxB}
-          />
+        <div
+          ref={(boxes) => { this.boxes = boxes; }}
+          className={styles.boxes}
+        >
+          <div className={styles.track}>
+            <div
+              ref={(box) => { this.boxA = box; }}
+              className={styles.boxA}
+            />
+          </div>
+          <div className={styles.track}>
+            <div
+              ref={(box) => { this.boxB = box; }}
+              className={styles.boxB}
+            />
+          </div>
         </div>
         <div className={styles.triggers}>
           <AwesomeButton
             type="primary"
+            size="small"
             cssModule={AwesomeButtonStyles}
-            action={this.triggerIt}
+            action={this.moveIt}
           >
-            Trigger it
-          </AwesomeButton>
-          <AwesomeButton
-            cssModule={AwesomeButtonStyles}
-            action={this.reverseIt}
-          >
-            Reverse it
+            {this.state.moveLabel}
           </AwesomeButton>
           <AwesomeButton
             type="secondary"
+            size="small"
+            cssModule={AwesomeButtonStyles}
+            action={this.overlapIt}
+          >
+            {this.state.overlapLabel}
+          </AwesomeButton>
+          <AwesomeButton
+            type="disabled"
+            size="small"
             cssModule={AwesomeButtonStyles}
             action={this.resetIt}
           >
-            Reset it
+            Reset
           </AwesomeButton>
         </div>
       </div>

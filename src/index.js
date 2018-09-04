@@ -8,33 +8,38 @@ function recursiveAnimationFrame(frames, callback) {
   callback();
 }
 
-function setCssEndEvent(element, type) {
+export function setCssEndEvent(element, type, { tolerance = 0, propertyName }) {
   return new Promise((resolve) => {
     if (!element) {
       resolve(false);
       return;
     }
+    let eventName = null;
     const capitalized = type.charAt(0).toUpperCase() + type.slice(1);
-    if (element.style[`Webkit${capitalized}`] !== undefined) {
-      element.addEventListener(`webkit${capitalized}End`, (event) => {
-        if (event.srcElement === element) {
-          resolve();
+    let run = 0;
+    function end(event) {
+      const target = event.srcElement || event.target;
+      if (target === element) {
+        if (run >= tolerance) {
+          if (propertyName && propertyName !== event.propertyName) {
+            return;
+          }
+          element.removeEventListener(eventName, end);
+          resolve(event);
         }
-      });
-      return;
-    } else if (element.style.OTransition !== undefined) {
-      element.addEventListener(`o${type}End`, (event) => {
-        if (event.srcElement === element) {
-          resolve();
-        }
-      });
-      return;
-    }
-    element.addEventListener(`${type}End`, (event) => {
-      if (event.srcElement === element) {
-        resolve();
+        run += 1;
       }
-    });
+    }
+    if (element.style[`Webkit${capitalized}`] !== undefined) {
+      eventName = `webkit${capitalized}End`;
+    }
+    if (element.style.OTransition !== undefined) {
+      eventName = `o${type}End`;
+    }
+    if (element.style[type] !== undefined) {
+      eventName = `${type}end`;
+    }
+    element.addEventListener(eventName, end);
   });
 }
 
@@ -52,18 +57,14 @@ export function beforeFutureCssLayout(frames, callback) {
   recursiveAnimationFrame(frames + 1, callback);
 }
 
-export function waitTransitionEnd(element) {
+export function onceTransitionEnd(element, options = {}) {
   return new Promise((resolve) => {
-    setCssEndEvent(element, 'transition').then(resolve);
+    setCssEndEvent(element, 'transition', options).then(resolve);
   });
 }
 
-export function onceTransitionEnd(element, callback) {
-  setCssEndEvent(element, 'transition').then(callback);
-}
-
-export function waitAnimationEnd(element) {
+export function onceAnimationEnd(element, options = {}) {
   return new Promise((resolve) => {
-    setCssEndEvent(element, 'animation').then(resolve);
+    setCssEndEvent(element, 'animation', options).then(resolve);
   });
 }

@@ -1,124 +1,150 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { beforeFutureCssLayout, onceTransitionEnd } from '../../../src/index';
+import { onceTransitionEnd } from '../../../src/index';
 import BoxDouble from '../components/box-double';
 import styles from './example-a.scss';
 
-console.log(beforeFutureCssLayout);
+const HJS_ITERATIONS = 500000;
+const BOX_SIZE = 160;
+const BOX_PADDING = 25;
 
-function simulateHeavyJS(element, delay = 20) {
+function simulateHeavyJS(element, delay = 350) {
   setTimeout(() => {
-    for (let i = 0; i < 60000; i += 1) {
+    for (let i = 0; i < HJS_ITERATIONS; i += 1) {
       element.getBoundingClientRect().top;
     }
   }, delay);
 }
 
-
 export default class ExampleA extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      transitionDuration: '3000ms',
+      range: 0,
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resize);
+    this.resize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
+  resize = () => {
+    const rect = this.container.getBoundingClientRect();
+    let duration = 2500;
+
+    if (rect.width < 820) {
+      duration = 2000;
+    }
+    if (rect.width < 620) {
+      duration = 1600;
+    }
+    if (rect.width < 420) {
+      duration = 1200;
+    }
+
+    this.setState({
+      transitionDuration: `${duration}ms`,
+      range: `${rect.width - BOX_SIZE - (BOX_PADDING * 2)}px`,
+    });
+  }
+
+  forward = ({ boxA, boxB }) => {
+    boxA.classList.add(styles.animated);
+    boxB.classList.add(styles.animated);
+    boxA.classList.add(styles.boxAFinal);
+    boxB.classList.add(styles.boxBFinal);
+  }
+
+  reverse = ({ boxA, boxB }) => {
+    boxA.classList.remove(styles.boxAFinal);
+    boxB.classList.remove(styles.boxBFinal);
+  }
+
+  reset = ({ boxA, boxB }) => {
+    boxA.classList.remove(styles.animated);
+    boxB.classList.remove(styles.animated);
+    boxA.classList.remove(styles.boxAFinal);
+    boxB.classList.remove(styles.boxBFinal);
+  }
+
+  onDurationChange = (event) => {
+    console.log('on duration change');
+    this.setState({
+      transitionDuration: `${event.currentTarget.value}ms`,
+    });
   }
 
   render() {
     return (
-      <div className={styles.container}>
+      <div
+        ref={(container) => { this.container = container; }}
+        className={styles.container}
+        style={{
+          '--duration': `${this.state.transitionDuration}`,
+          '--range': `${this.state.range}`,
+        }}
+      >
+        <div className={styles.config}>
+          <ul>
+            <li>
+              <label>Animation Duration</label>
+              <div>
+                <input
+                  onChange={this.onDurationChange}
+                  type="range"
+                  min="1000"
+                  max="10000"
+                  value={this.state.transitionDuration.replace(/ms/, '') * 1}
+                  step="1000"
+                />
+                <span>{this.state.transitionDuration}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
         <BoxDouble
           title="Clean Animation"
           description="Using Translate3d and Left properties"
           trigger={({ boxA, boxB }) => {
-            boxA.classList.add(styles.animated);
-            boxB.classList.add(styles.animated);
-            boxA.classList.add(styles.boxAFinal);
-            boxB.classList.add(styles.boxBFinal);
+            this.forward({ boxA, boxB });
           }}
           reverse={({ boxA, boxB }) => {
-            boxA.classList.remove(styles.boxAFinal);
-            boxB.classList.remove(styles.boxBFinal);
+            this.reverse({ boxA, boxB });
           }}
-          reset={({ boxA, boxB }) => {
-            boxA.classList.remove(styles.animated);
-            boxB.classList.remove(styles.animated);
-            boxA.classList.remove(styles.boxAFinal);
-            boxB.classList.remove(styles.boxBFinal);
-          }}
+          reset={this.reset}
         />
         <BoxDouble
           title="Heavy Computation"
-          description="Using Translate3d and Left properties. Simulating heavy js computation stack."
+          description="Using Translate3d and Left properties. Simulating heavy js computation stack. (200ms)"
           trigger={({ boxA, boxB }) => {
-            boxA.classList.add(styles.animated);
-            boxB.classList.add(styles.animated);
-            boxA.classList.add(styles.boxAFinal);
-            boxB.classList.add(styles.boxBFinal);
+            this.forward({ boxA, boxB });
             simulateHeavyJS(boxA);
           }}
           reverse={({ boxA, boxB }) => {
-            boxA.classList.remove(styles.boxAFinal);
-            boxB.classList.remove(styles.boxBFinal);
+            this.reverse({ boxA, boxB });
             simulateHeavyJS(boxA);
           }}
-          reset={({ boxA, boxB }) => {
-            boxA.classList.remove(styles.animated);
-            boxB.classList.remove(styles.animated);
-            boxA.classList.remove(styles.boxAFinal);
-            boxB.classList.remove(styles.boxBFinal);
-          }}
-        />
-        <BoxDouble
-          title="Heavy Computation + Before Future Frame"
-          description="Animating Translate3d and Left properties. Simulating heavy js computation stack. Throwing it 5 frames into the future."
-          trigger={({ boxA, boxB }) => {
-            boxA.classList.add(styles.animated);
-            boxB.classList.add(styles.animated);
-            console.timeStamp('HERE');
-            beforeFutureCssLayout(5, () => {
-              console.timeStamp('THERE');
-              boxA.classList.add(styles.boxAFinal);
-              boxB.classList.add(styles.boxBFinal);
-            });
-            simulateHeavyJS(boxA);
-          }}
-          reverse={({ boxA, boxB }) => {
-            console.timeStamp('HERE');
-            beforeFutureCssLayout(5, () => {
-              console.timeStamp('THERE');
-              boxA.classList.remove(styles.boxAFinal);
-              boxB.classList.remove(styles.boxBFinal);
-            });
-            simulateHeavyJS(boxA);
-          }}
-          reset={({ boxA, boxB }) => {
-            boxA.classList.remove(styles.animated);
-            boxB.classList.remove(styles.animated);
-            boxA.classList.remove(styles.boxAFinal);
-            boxB.classList.remove(styles.boxBFinal);
-          }}
+          reset={this.reset}
         />
         <BoxDouble
           title="Return Animation"
           description="Translate3d and Left. Returning animation with onceTransitionEnd"
           trigger={({ boxA, boxB }) => {
-            boxA.classList.add(styles.animated);
-            boxB.classList.add(styles.animated);
-            boxA.classList.add(styles.boxAFinal);
-            boxB.classList.add(styles.boxBFinal);
-            onceTransitionEnd(boxA, () => {
-              boxA.classList.remove(styles.boxAFinal);
-              boxB.classList.remove(styles.boxBFinal);
+            this.forward({ boxA, boxB });
+            onceTransitionEnd(boxA).then(() => {
+              this.reverse({ boxA, boxB });
             });
           }}
           reverse={({ boxA, boxB }) => {
-            boxA.classList.remove(styles.boxAFinal);
-            boxB.classList.remove(styles.boxBFinal);
+            this.reverse({ boxA, boxB });
           }}
-          reset={({ boxA, boxB }) => {
-            boxA.classList.remove(styles.animated);
-            boxB.classList.remove(styles.animated);
-            boxA.classList.remove(styles.boxAFinal);
-            boxB.classList.remove(styles.boxBFinal);
-          }}
+          reset={this.reset}
         />
       </div>
     );
