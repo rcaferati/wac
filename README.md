@@ -34,7 +34,7 @@ For all the following examples please consider the following HTML markup.
 </div>
 ```
 
-#### Full HTML with ES5
+#### HTML with ES5
 ```html
 <script src="/path/to/web-animation-club.min.js"></script>
 <script>
