@@ -23,11 +23,13 @@ yarn add --save web-animation-club
   import { onceTransitionEnd, onceAnimationEnd } from 'web-animation-club';
 
   const element = document.querySelector('#html-element');
-
+  
+  // if you are using the transition css property
   onceTransitionEnd(element).then((event) => {
     // ... do something
   });
  
+  // if you are using the animation css property
   onceAnimationEnd(element).then((event) => {
     // ... do something
   });
