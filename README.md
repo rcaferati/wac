@@ -48,7 +48,7 @@ For all the following examples please consider the following HTML markup.
   });
 </script>
 ```
-#### ES6
+#### Javascript ES6
 ```jsx
   import { onceTransitionEnd } from 'web-animation-club';
 
