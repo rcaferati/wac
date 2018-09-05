@@ -19,6 +19,7 @@ yarn add --save web-animation-club
 ```
 
 ### Basic Usage
+#### ES6
 ```jsx
   import { onceTransitionEnd, onceAnimationEnd } from 'web-animation-club';
 
@@ -36,4 +37,29 @@ yarn add --save web-animation-club
   onceAnimationEnd(element).then((event) => {
     // ... do something
   });
+```
+### HTML + ES5
+```html
+<style>
+  .animated {
+    transition: transform 0.4s linear;
+  }
+  .move-right {
+    transform: translateX(100px);
+  }
+</style>
+<div class="container">
+  <div class="box"></div>
+</div>
+<script src="/path/to/web-animation-club.min.js"></script>
+<script>
+  var box = document.querySelector('.box');
+  
+  box.classList.add('animated');
+  box.classList.add('move');
+  
+  onceTransitionEnd(box).then(function() {
+    box.classList.remove('move');
+  });
+</script>
 ```
