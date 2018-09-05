@@ -11,11 +11,15 @@ yarn add --save web-animation-club
 
 ### Basic Usage
 ```jsx
-  import { onceTransitionEnd } from 'web-animation-club';
+  import { onceTransitionEnd, onceAnimationEnd } from 'web-animation-club';
 
   const element = document.querySelector('#html-element');
 
   onceTransitionEnd(element).then(() => {
+
+  });
+ 
+  onceAnimationEnd(element).then(() => {
 
   });
 ```
