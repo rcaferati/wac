@@ -24,6 +24,9 @@ yarn add --save web-animation-club
 
   const element = document.querySelector('#html-element');
   
+  // here we're just simulating the addition of a class with some animation property
+  element.classList.add('animate');
+  
   // if you are using the transition css property
   onceTransitionEnd(element).then((event) => {
     // ... do something
