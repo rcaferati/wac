@@ -1,5 +1,6 @@
 # web-animation-club
 
+### Installation
 #### Dist file
 Just load directly in your `HTML` the `web-animation-club.min.js` javascript file located on the `dist` folder.
 ```html
@@ -8,7 +9,7 @@ Just load directly in your `HTML` the `web-animation-club.min.js` javascript fil
 ...
 ```
 
-### Installation
+#### NPM Registry
 From the `NPM registry` using npm or yarn just install the `web-animation-club` package.
 ```
 npm install --save web-animation-club
@@ -43,7 +44,7 @@ For all the following examples please consider the following HTML markup.
   box.classList.add('animated');
   box.classList.add('move');
   
-  onceTransitionEnd(box).then(function() {
+  onceTransitionEnd(box).then(function(event) {
     // ... do something
   });
 </script>
