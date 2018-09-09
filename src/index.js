@@ -57,6 +57,12 @@ export function beforeFutureCssLayout(frames, callback) {
   recursiveAnimationFrame(frames + 1, callback);
 }
 
+export function onceNextCssLayout() {
+  return new Promise((resolve) => {
+    beforeNextCssLayout(resolve);
+  });
+}
+
 export function onceTransitionEnd(element, options = {}) {
   return new Promise((resolve) => {
     setCssEndEvent(element, 'transition', options).then(resolve);
