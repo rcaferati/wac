@@ -2,7 +2,6 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production' || false;
-
 const minimizer = [];
 
 if (production) {
