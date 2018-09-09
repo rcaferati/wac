@@ -44,7 +44,7 @@ For all the following examples please consider the following HTML markup.
   box.classList.add('animated');
   box.classList.add('move');
   
-  onceTransitionEnd(box).then(function() {
+  onceTransitionEnd(box).then(function(event) {
     // ... do something
   });
 </script>
