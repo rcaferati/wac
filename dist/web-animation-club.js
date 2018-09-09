@@ -76,92 +76,22 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! exports provided: setCssEndEvent, beforeCssLayout, beforeNextCssLayout, beforeFutureCssLayout, onceNextCssLayout, onceTransitionEnd, onceAnimationEnd */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCssEndEvent", function() { return setCssEndEvent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "beforeCssLayout", function() { return beforeCssLayout; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "beforeNextCssLayout", function() { return beforeNextCssLayout; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "beforeFutureCssLayout", function() { return beforeFutureCssLayout; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onceTransitionEnd", function() { return onceTransitionEnd; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onceAnimationEnd", function() { return onceAnimationEnd; });
-function recursiveAnimationFrame(frames, callback) {
-  if (frames && Number.isInteger(frames) && frames > 0) {
-    window.requestAnimationFrame(() => {
-      recursiveAnimationFrame(frames - 1, callback);
-    });
-    return;
-  }
-  callback();
-}
-
-function setCssEndEvent(element, type, { tolerance = 0, propertyName }) {
-  return new Promise(resolve => {
-    if (!element) {
-      resolve(false);
-      return;
-    }
-    let eventName = null;
-    const capitalized = type.charAt(0).toUpperCase() + type.slice(1);
-    let run = 0;
-    function end(event) {
-      const target = event.srcElement || event.target;
-      if (target === element) {
-        if (run >= tolerance) {
-          if (propertyName && propertyName !== event.propertyName) {
-            return;
-          }
-          element.removeEventListener(eventName, end);
-          resolve(event);
-        }
-        run += 1;
-      }
-    }
-    if (element.style[`Webkit${capitalized}`] !== undefined) {
-      eventName = `webkit${capitalized}End`;
-    }
-    if (element.style.OTransition !== undefined) {
-      eventName = `o${type}End`;
-    }
-    if (element.style[type] !== undefined) {
-      eventName = `${type}end`;
-    }
-    element.addEventListener(eventName, end);
-  });
-}
-
-function beforeCssLayout(callback) {
-  window.requestAnimationFrame(callback);
-}
-
-function beforeNextCssLayout(callback) {
-  window.requestAnimationFrame(() => {
-    window.requestAnimationFrame(callback);
-  });
-}
-
-function beforeFutureCssLayout(frames, callback) {
-  recursiveAnimationFrame(frames + 1, callback);
-}
-
-function onceTransitionEnd(element, options = {}) {
-  return new Promise(resolve => {
-    setCssEndEvent(element, 'transition', options).then(resolve);
-  });
-}
-
-function onceAnimationEnd(element, options = {}) {
-  return new Promise(resolve => {
-    setCssEndEvent(element, 'animation', options).then(resolve);
-  });
-}
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"setCssEndEvent\", function() { return setCssEndEvent; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"beforeCssLayout\", function() { return beforeCssLayout; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"beforeNextCssLayout\", function() { return beforeNextCssLayout; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"beforeFutureCssLayout\", function() { return beforeFutureCssLayout; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"onceNextCssLayout\", function() { return onceNextCssLayout; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"onceTransitionEnd\", function() { return onceTransitionEnd; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"onceAnimationEnd\", function() { return onceAnimationEnd; });\nfunction recursiveAnimationFrame(frames, callback) {\n  if (frames && Number.isInteger(frames) && frames > 0) {\n    window.requestAnimationFrame(() => {\n      recursiveAnimationFrame(frames - 1, callback);\n    });\n    return;\n  }\n  callback();\n}\n\nfunction setCssEndEvent(element, type, { tolerance = 0, propertyName } = {}) {\n  return new Promise(resolve => {\n    if (!element) {\n      resolve(false);\n      return;\n    }\n    let eventName = null;\n    const capitalized = type.charAt(0).toUpperCase() + type.slice(1);\n    let run = 0;\n    function end(event) {\n      const target = event.srcElement || event.target;\n      if (target === element) {\n        if (run >= tolerance) {\n          if (propertyName && propertyName !== event.propertyName) {\n            return;\n          }\n          element.removeEventListener(eventName, end);\n          resolve(event);\n        }\n        run += 1;\n      }\n    }\n    if (element.style[`Webkit${capitalized}`] !== undefined) {\n      eventName = `webkit${capitalized}End`;\n    }\n    if (element.style.OTransition !== undefined) {\n      eventName = `o${type}End`;\n    }\n    if (element.style[type] !== undefined) {\n      eventName = `${type}end`;\n    }\n    element.addEventListener(eventName, end);\n  });\n}\n\nfunction beforeCssLayout(callback) {\n  window.requestAnimationFrame(callback);\n}\n\nfunction beforeNextCssLayout(callback) {\n  window.requestAnimationFrame(() => {\n    window.requestAnimationFrame(callback);\n  });\n}\n\nfunction beforeFutureCssLayout(frames, callback) {\n  recursiveAnimationFrame(frames + 1, callback);\n}\n\nfunction onceNextCssLayout() {\n  return new Promise(resolve => {\n    beforeNextCssLayout(resolve);\n  });\n}\n\nfunction onceTransitionEnd(element, options = {}) {\n  return new Promise(resolve => {\n    setCssEndEvent(element, 'transition', options).then(resolve);\n  });\n}\n\nfunction onceAnimationEnd(element, options = {}) {\n  return new Promise(resolve => {\n    setCssEndEvent(element, 'animation', options).then(resolve);\n  });\n}\n\n//# sourceURL=webpack://wac/./src/index.js?");
 
 /***/ })
-/******/ ]);
+
+/******/ });
 });

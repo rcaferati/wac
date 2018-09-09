@@ -47,7 +47,7 @@
   "scripts": {
     "build": "webpack --mode development",
     "start": "webpack-dev-server -d --config webpack.demo.config.js",
-    "build-min": "webpack --mode production --optimize-minimize",
+    "build-min": "NODE_ENV=production webpack --mode production --optimize-minimize",
     "build-watch": "webpack --mode development --watch",
     "test": "echo true",
     "prepublish": "npm run build && npm run build-min"

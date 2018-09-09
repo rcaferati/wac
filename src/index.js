@@ -8,7 +8,7 @@ function recursiveAnimationFrame(frames, callback) {
   callback();
 }
 
-export function setCssEndEvent(element, type, { tolerance = 0, propertyName }) {
+export function setCssEndEvent(element, type, { tolerance = 0, propertyName } = {}) {
   return new Promise((resolve) => {
     if (!element) {
       resolve(false);
