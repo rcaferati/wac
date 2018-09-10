@@ -6,7 +6,7 @@ Small `~0.6kb` javascript library with cross-browser methods to handle CSS `ontr
 Just load directly in your `HTML` the `web-animation-club.min.js` javascript file located on the `dist` folder.
 ```html
 ... 
-<script src="/path/to/web-animation-club.min.js"></script>
+<script src="https://webanimation.club/library/0.1.2/web-animation-club.min.js"></script>
 ...
 ```
 
