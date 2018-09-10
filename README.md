@@ -1,6 +1,11 @@
 # web-animation-club
 Small `~0.6kb` javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` events. AKA css animation and transition callbacks.
 
+### Live Demo
+Access the demo at [https://webanimation.club](https://webanimation.club)
+
+[<img width="600" alt="react-awesome-slider demo" src="https://github.com/rcaferati/web-animation-club/blob/master/demo/assets/wac-video.gif?raw=true">](https://webanimation.club)
+
 ### Installation
 #### From the `dist` file
 Just load directly in your `HTML` the `web-animation-club.min.js` javascript file located on the `dist` folder.
