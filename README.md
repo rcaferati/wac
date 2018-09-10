@@ -2,7 +2,7 @@
 Small `~0.6kb` javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` events. AKA css animation and transition callbacks.
 
 ### Installation
-#### Dist file
+#### From the `dist` file
 Just load directly in your `HTML` the `web-animation-club.min.js` javascript file located on the `dist` folder.
 ```html
 ... 
