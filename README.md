@@ -1,5 +1,5 @@
 # web-animation-club
-Small (~0.6kb) javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` events. AKA css animation and transition callbacks.
+Small `~0.6kb` javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` events. AKA css animation and transition callbacks.
 
 ### Installation
 #### Dist file
