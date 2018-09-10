@@ -4,7 +4,7 @@ Small `~0.6kb` javascript library with cross-browser methods to handle CSS `ontr
 ### Live Demo
 Access the demo at [https://webanimation.club](https://webanimation.club)
 
-[<img width="600" alt="react-awesome-slider demo" src="https://github.com/rcaferati/web-animation-club/blob/master/demo/assets/wac-video.gif?raw=true">](https://webanimation.club)
+[<img width="600" alt="react-awesome-slider demo" src="https://github.com/rcaferati/web-animation-club/blob/master/demo/assets/wac-demo.gif?raw=true">](https://webanimation.club)
 
 ### Installation
 #### From the `dist` file
