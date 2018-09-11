@@ -71,7 +71,7 @@ For all the following examples please consider the following HTML markup.
   });
 ```
 
-## Library Methods
+## WAC methods
 
 #### onceTransitionEnd(element, options)
 - `element` <[HTML element]> html element on which the transition is happening
