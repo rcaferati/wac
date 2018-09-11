@@ -1,12 +1,12 @@
 # web-animation-club
-Small `~0.6kb` javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` events. AKA css animation and transition callbacks.
+Small `~0.8kb` javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` events. AKA css animation and transition callbacks.
 
-### Live Demo
+## Live Demo
 Access the demo at [https://webanimation.club](https://webanimation.club)
 
 [<img width="600" alt="react-awesome-slider demo" src="https://github.com/rcaferati/web-animation-club/blob/master/demo/assets/wac-video.gif?raw=true">](https://webanimation.club)
 
-### Installation
+## Installation
 #### From the `dist` file
 Just load directly in your `HTML` the `web-animation-club.min.js` javascript file located on the `dist` folder.
 ```html
@@ -25,7 +25,7 @@ or
 yarn add --save web-animation-club
 ```
 
-### Basic Usage
+## Basic Usage
 For all the following examples please consider the following HTML markup.
 ```html
 <style>
@@ -70,3 +70,34 @@ For all the following examples please consider the following HTML markup.
     // ... do something
   });
 ```
+
+## Library Methods
+
+#### onceTransitionEnd(element, options)
+- `element` <[HTML element]> html element on which the transition is happening
+- `options` <[object]>
+  - `tolerance` <[integer]> used in case of pseudo-element animations
+  - `property` <[string]> animated property to check before calling the callback
+
+#### onceAnimationEnd(element, options)
+- `element` <[HTML element]> html element on which the transition is happening
+- `options` <[object]>
+  - `tolerance` <[integer]> used in case of pseudo-element animations
+  - `property` <[string]> animated property to check before calling the callback
+  
+#### beforeFutureCssLayout(frames, callback)
+- `frames` <[integer]> Number of frames to skip
+- `callback` <[function]> function called after the skipped frames
+
+#### beforeNextCssLayout(callback)
+- `callback` <[function]> function called after the skipped frame
+
+## Author
+#### Rafael Caferati
++ Checkout my <a href="https://caferati.me" title="Full-Stack Web Developer, UI/UX Javascript Specialist" target="_blank">Full-Stack Web Developer Website</a>
++ Other open source projects @ <a title="Web Software Developer Code Laboratory" target="_blank" href="https://caferati.me/labs">Code Laboratory</a>
++ A scope of my work @ <a title="Web Software Developer Portfolio" target="_blank" href="https://caferati.me/portfolio">Web Portfolio</a>
+
+## License
+
+MIT. Copyright (c) 2018 Rafael Caferati.
