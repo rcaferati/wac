@@ -1,4 +1,7 @@
 # web-animation-club
+
+[![Travis](https://img.shields.io/travis/rcaferati/web-animation-club/master.svg)](https://travis-ci.org/rcaferati/web-animation-club) ![NPM](https://img.shields.io/npm/v/web-animation-club.svg)
+
 Tiny `~0.8kb` javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` events. AKA css animation and transition callbacks.
 
 ## Live Demo
