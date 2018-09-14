@@ -4,6 +4,14 @@
 
 Tiny `~0.8kb` javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` events. AKA css animation and transition callbacks.
 
+## Quick usage
+Quick usage example of the `onceTransitionEnd` wac method.
+```javascript
+wac.onceTransitionEnd(element).then(function(event) {
+  // ... do something
+});
+```
+
 ## Live Demo
 Access the demo at [https://webanimation.club](https://webanimation.club)
 
