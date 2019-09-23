@@ -1,5 +1,5 @@
 function recursiveAnimationFrame(frames, callback) {
-  if (frames && Number.isInteger(frames) && frames > 0) {
+  if (window && frames && Number.isInteger(frames) && frames > 0) {
     window.requestAnimationFrame(() => {
       recursiveAnimationFrame(frames - 1, callback);
     });
@@ -8,8 +8,12 @@ function recursiveAnimationFrame(frames, callback) {
   callback();
 }
 
-export function setCssEndEvent(element, type, { tolerance = 0, propertyName } = {}) {
-  return new Promise((resolve) => {
+export function setCssEndEvent(
+  element,
+  type,
+  { tolerance = 0, propertyName } = {}
+) {
+  return new Promise(resolve => {
     if (!element) {
       resolve(false);
       return;
@@ -44,13 +48,14 @@ export function setCssEndEvent(element, type, { tolerance = 0, propertyName } = 
 }
 
 export function beforeCssLayout(callback) {
-  window.requestAnimationFrame(callback);
+  window && window.requestAnimationFrame(callback);
 }
 
 export function beforeNextCssLayout(callback) {
-  window.requestAnimationFrame(() => {
-    window.requestAnimationFrame(callback);
-  });
+  window &&
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(callback);
+    });
 }
 
 export function beforeFutureCssLayout(frames, callback) {
@@ -58,19 +63,19 @@ export function beforeFutureCssLayout(frames, callback) {
 }
 
 export function onceNextCssLayout() {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     beforeNextCssLayout(resolve);
   });
 }
 
 export function onceTransitionEnd(element, options = {}) {
-  return new Promise((resolve) => {
-    setCssEndEvent(element, 'transition', options).then(resolve);
+  return new Promise(resolve => {
+    setCssEndEvent(element, "transition", options).then(resolve);
   });
 }
 
 export function onceAnimationEnd(element, options = {}) {
-  return new Promise((resolve) => {
-    setCssEndEvent(element, 'animation', options).then(resolve);
+  return new Promise(resolve => {
+    setCssEndEvent(element, "animation", options).then(resolve);
   });
 }
