@@ -4,8 +4,8 @@
   "description": "Web Animation Club",
   "repository": "rcaferati/web-animation-club",
   "license": "MIT",
-  "main": "dist/web-animation-club.js",
-  "module": "dist/web-animation-club.js",
+  "main": "dist/web-animation-club.min.js",
+  "module": "dist/web-animation-club.min.js",
   "keywords": [
     "clipboard",
     "copy",

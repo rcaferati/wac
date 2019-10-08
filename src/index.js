@@ -43,6 +43,12 @@ export function setCssEndEvent(
     if (element.style[type] !== undefined) {
       eventName = `${type}end`;
     }
+    if (element.clearCssEndEvent) {
+      element.clearCssEndEvent();
+    }
+    element.clearCssEndEvent = function() {
+      element.removeEventListener(eventName, end);
+    };
     element.addEventListener(eventName, end);
   });
 }
