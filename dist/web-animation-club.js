@@ -7,7 +7,7 @@
 		exports["wac"] = factory();
 	else
 		root["wac"] = factory();
-})(window, function() {
+})(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
