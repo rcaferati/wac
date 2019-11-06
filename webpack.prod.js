@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "web-animation-club.js",
+    filename: "web-animation-club.min.js",
     path: path.resolve(__dirname, "dist"),
     library: "wac",
     libraryTarget: "umd",
