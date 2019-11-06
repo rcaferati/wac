@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "build": "webpack --mode development",
-    "build-min": "NODE_ENV=production webpack --mode production --optimize-minimize",
+    "build-min": "webpack --mode production --config webpack.prod.js",
     "build-watch": "webpack --mode development --watch",
     "test": "echo true",
     "prepublish": "npm run build && npm run build-min"
@@ -32,8 +32,8 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "uglifyjs-webpack-plugin": "^1.3.0",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.4"
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   }
 }
