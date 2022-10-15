@@ -13,19 +13,11 @@ wac.onceTransitionEnd(element).then(function(event) {
 ```
 
 ## Live Demo
-Access the demo at [https://webanimation.club](https://webanimation.club)
+Access the demo at [https://web-animation.caferati.me](https://web-animation.caferati.me)
 
-[<img width="600" alt="react-awesome-slider demo" src="https://github.com/rcaferati/web-animation-club/blob/master/demo/assets/wac-video.gif?raw=true">](https://webanimation.club)
+[<img width="600" alt="react-awesome-slider demo" src="https://github.com/rcaferati/web-animation-club/blob/master/demo/assets/wac-video.gif?raw=true">](https://web-animation.caferati.me)
 
 ## Installation
-
-#### From the `dist` file
-Just load directly in your `HTML` the `web-animation-club.min.js` javascript file located on the `dist` folder.
-```html
-... 
-<script src="https://webanimation.club/library/0.1.2/web-animation-club.min.js"></script>
-...
-```
 
 #### NPM Registry
 From the `NPM registry` using npm or yarn just install the `web-animation-club` package.
@@ -106,9 +98,9 @@ For all the following examples please consider the following HTML markup.
 
 ## Author
 #### Rafael Caferati
-+ Checkout my <a href="https://caferati.me" title="Full-Stack Web Developer, UI/UX Javascript Specialist" target="_blank">Full-Stack Web Developer Website</a>
-+ Other open source projects @ <a title="Web Software Developer Code Laboratory" target="_blank" href="https://caferati.me/labs">Code Laboratory</a>
-+ A scope of my work @ <a title="Web Software Developer Portfolio" target="_blank" href="https://caferati.me/portfolio">Web Portfolio</a>
++ Checkout my <a href="https://caferati.me" title="Full-Stack Web Developer, UI/UX Javascript Specialist" target="_blank">Portfolio Website</a>
++ Follow on <a href="https://github.com/rcaferati" title="rcaferati github profile" target="_blank">GitHub</a>
++ Connect on <a href="https://linkedin.com/in/rcaferati" title="rcaferati linkedin profile" target="_blank">LinkedIn</a>
 
 ## License
 
