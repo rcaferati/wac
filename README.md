@@ -1,8 +1,8 @@
-# web-animation-club
+# WAC — CSS transition and animation controls
 
 [![Travis](https://img.shields.io/travis/rcaferati/web-animation-club/master.svg)](https://travis-ci.org/rcaferati/web-animation-club) ![NPM](https://img.shields.io/npm/v/web-animation-club.svg)
 
-Tiny `~0.8kb` javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` events. AKA css animation and transition callbacks.
+Tiny `~0.8kb` javascript library with cross-browser methods to handle CSS `ontransitionend` and `onanimationend` event — AKA CSS animation and transition callbacks.
 
 ## Quick usage
 Quick usage example of the `onceTransitionEnd` wac method.
@@ -20,13 +20,13 @@ Access the demo at [https://web-animation.caferati.me](https://web-animation.caf
 ## Installation
 
 #### NPM Registry
-From the `NPM registry` using npm or yarn just install the `web-animation-club` package.
+From the `NPM registry` using npm or yarn just install `@rcaferati/wac` package.
 ```
-npm install --save web-animation-club
+npm install --save @rcaferati/wac
 ```
 or
 ```
-yarn add --save web-animation-club
+yarn add --save @rcaferati/wac
 ```
 
 ## Basic Usage
@@ -47,7 +47,7 @@ For all the following examples please consider the following HTML markup.
 
 #### HTML with ES5
 ```html
-<script src="/path/to/web-animation-club.min.js"></script>
+<script src="/path/to/wac.min.js"></script>
 <script>
   var box = document.querySelector('.box');
   
@@ -61,7 +61,7 @@ For all the following examples please consider the following HTML markup.
 ```
 #### Javascript ES6
 ```jsx
-  import { onceTransitionEnd } from 'web-animation-club';
+  import { onceTransitionEnd } from '@rcaferati/wac';
 
   const element = document.querySelector('.box');
   
