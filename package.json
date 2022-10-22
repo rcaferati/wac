@@ -2,8 +2,15 @@
   "name": "@rcaferati/wac",
   "version": "1.0.0",
   "description": "CSS controlled animations with transitionEnd, onTransitionEnd, animationend, onAnimationEnd events and frame throwing. Tiny javascript library with cross-browser methods to handle css animation/transition callbacks and event loop frame throwing.",
-  "repository": "rcaferati/wac",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rcaferati/wac.git"
+  },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://web-animation.caferati.me",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "keywords": [
