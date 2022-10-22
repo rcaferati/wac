@@ -1,8 +1,8 @@
 {
-  "name": "web-animation-club",
+  "name": "@rcaferati/wac",
   "version": "1.0.0",
-  "description": "Web Animation Club",
-  "repository": "rcaferati/web-animation-club",
+  "description": "CSS controlled animations with transitionEnd, onTransitionEnd, animationend, onAnimationEnd events and frame throwing. Tiny javascript library with cross-browser methods to handle css animation/transition callbacks and event loop frame throwing.",
+  "repository": "rcaferati/wac",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
