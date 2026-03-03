@@ -5,6 +5,7 @@
 Tiny JavaScript utility for CSS `transitionend` / `animationend` callbacks and frame/layout timing helpers.
 
 WAC provides small Promise-based helpers to:
+
 - wait for a transition or animation to finish
 - ignore bubbled events from child elements
 - schedule code on the next layout / future frames
@@ -15,9 +16,11 @@ WAC provides small Promise-based helpers to:
 ## Installation
 
 ### npm
+
 npm install @rcaferati/wac
 
 ### yarn
+
 yarn add @rcaferati/wac
 
 ---
@@ -25,6 +28,7 @@ yarn add @rcaferati/wac
 ## Quick usage
 
 ### Wait for a transition to finish
+
 ```js
 import { onceTransitionEnd } from "@rcaferati/wac";
 
@@ -39,6 +43,7 @@ onceTransitionEnd(box).then((event) => {
 ```
 
 ### Wait for a specific transitioned property
+
 ```js
 import { onceTransitionEnd } from "@rcaferati/wac";
 
@@ -48,6 +53,7 @@ onceTransitionEnd(box, { propertyName: "transform" }).then(() => {
 ```
 
 ### Wait for an animation to finish
+
 ```js
 import { onceAnimationEnd } from "@rcaferati/wac";
 
@@ -57,6 +63,7 @@ onceAnimationEnd(box).then((event) => {
 ```
 
 ### Run code after the next CSS layout
+
 ```js
 import { beforeCssLayout } from "@rcaferati/wac";
 
@@ -66,6 +73,7 @@ beforeCssLayout(() => {
 ```
 
 ### Wait N real display frames (rAF hops)
+
 ```js
 import { frameThrower } from "@rcaferati/wac";
 
@@ -73,6 +81,7 @@ await frameThrower(2); // waits using real display frames
 ```
 
 ### Wait N virtual frames (refresh-rate independent)
+
 ```js
 import { fixedFrameThrower } from "@rcaferati/wac";
 
@@ -123,12 +132,15 @@ await fixedFrameThrower(10);
 ## API
 
 ### `onceTransitionEnd(element, options?)`
+
 Waits for the next matching `transitionend` event on `element`.
 
 Returns:
+
 - `Promise<Event | false>`
 
 #### Options
+
 - `tolerance?: number`
   - Number of matching events to skip before resolving.
   - `0` resolves on the first matching event.
@@ -138,6 +150,7 @@ Returns:
   - Backward-compatible alias for `propertyName`.
 
 Example:
+
 ```js
 await onceTransitionEnd(el, { propertyName: "opacity" });
 ```
@@ -145,18 +158,22 @@ await onceTransitionEnd(el, { propertyName: "opacity" });
 ---
 
 ### `onceAnimationEnd(element, options?)`
+
 Waits for the next matching `animationend` event on `element`.
 
 Returns:
+
 - `Promise<Event | false>`
 
 #### Options
+
 - `tolerance?: number`
   - Number of matching events to skip before resolving.
 - `animationName?: string`
   - Optional animation name filter.
 
 Example:
+
 ```js
 await onceAnimationEnd(el, { animationName: "fade-in" });
 ```
@@ -164,38 +181,46 @@ await onceAnimationEnd(el, { animationName: "fade-in" });
 ---
 
 ### `setCssEndEvent(element, type, options?)`
+
 Low-level helper used internally by `onceTransitionEnd` / `onceAnimationEnd`.
 
 - `type`: `"transition"` or `"animation"`
 - Returns `Promise<Event | false>`
 
 Notes:
+
 - Ignores bubbled child events (only resolves for the exact target element).
 - Preserves historical "latest call wins" behavior per element (a new pending listener replaces a previous one created by WAC on the same element).
 
 ---
 
 ### `beforeCssLayout(callback)`
+
 Runs `callback` on the next animation frame.
 
 Fallback behavior:
+
 - If `requestAnimationFrame` is unavailable, runs immediately.
 
 ---
 
 ### `beforeFutureCssLayout(frames, callback)`
+
 Runs `callback` a number of frames into the future, plus one extra frame.
 
 Semantics:
+
 - `frames = 0` -> next animation frame
 - `frames = 1` -> roughly two frame hops from now
 
 Fallback behavior:
+
 - If `requestAnimationFrame` is unavailable, runs immediately.
 
 ---
 
 ### `recursiveAnimationFrame(frames, callback)`
+
 Low-level helper that recursively waits for `frames` animation frames and then runs `callback`.
 
 This powers the layout/frame helpers and can be used directly if needed.
@@ -203,16 +228,19 @@ This powers the layout/frame helpers and can be used directly if needed.
 ---
 
 ### `frameThrower(frames)`
+
 Promise wrapper around `beforeFutureCssLayout`.
 
 Uses real display frames (`requestAnimationFrame` hops), so elapsed time depends on monitor refresh rate (60Hz / 120Hz / etc).
 
 Returns:
+
 - `Promise<void>`
 
 ---
 
 ### `fixedFrameThrower(frames, fps = 60)`
+
 Refresh-rate independent timing helper.
 
 Same intent as `frameThrower()`, but `frames` are interpreted as "virtual frames" at `fps` (60 by default), so timing is stable across 60Hz/120Hz/etc displays.
@@ -220,33 +248,40 @@ Same intent as `frameThrower()`, but `frames` are interpreted as "virtual frames
 It still waits at least 1 `requestAnimationFrame` first, preserving CSS/layout timing semantics similar to `beforeFutureCssLayout`.
 
 Examples (`fps = 60`):
+
 - `fixedFrameThrower(0)` -> ~1 rAF (next layout)
 - `fixedFrameThrower(10)` -> ~1 rAF + ~166.7ms
 
 Returns:
+
 - `Promise<void>`
 
 ---
 
 ### `onceNextCssLayout()`
+
 Resolves after two animation frames (double-rAF).
 
 This is useful when you want DOM updates and style calculations to progress enough for reliable transition triggering or measurement.
 
 Returns:
+
 - `Promise<void>`
 
 ---
 
 ### `framesToMs(frames, fps = 60)`
+
 Converts "virtual frames" to milliseconds.
 
 Examples:
+
 - `framesToMs(1)` -> ~16.67
 - `framesToMs(10)` -> ~166.67
 - `framesToMs(10, 120)` -> ~83.33
 
 Returns:
+
 - `number`
 
 ---
@@ -266,6 +301,15 @@ Returns:
 ## Browser support
 
 WAC targets modern browsers and includes small legacy event-name fallbacks (WebKit / old Opera) for compatibility.
+
+---
+
+## Author
+
+**Rafael Caferati**  
+Website: [caferati.dev](https://caferati.dev)  
+LinkedIn: [linkedin.com/rcaferati](https://linkedin.com/in/rcaferati)  
+Instagram: [instagram.com/rcaferati](https://instagram.com/rcaferati)
 
 ---
 
