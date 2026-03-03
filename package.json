@@ -1,47 +1,69 @@
 {
   "name": "@rcaferati/wac",
-  "version": "1.0.0",
-  "description": "CSS controlled animations with transitionEnd, onTransitionEnd, animationend, onAnimationEnd events and frame throwing. Tiny javascript library with cross-browser methods to handle css animation/transition callbacks and event loop frame throwing.",
+  "version": "1.2.0",
+  "description": "Tiny JavaScript utility for CSS transitionend/animationend callbacks and frame/layout timing helpers.",
   "repository": {
     "type": "git",
     "url": "https://github.com/rcaferati/wac.git"
+  },
+  "homepage": "https://github.com/rcaferati/wac#readme",
+  "bugs": {
+    "url": "https://github.com/rcaferati/wac/issues"
   },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://web-animation.caferati.me",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18.18"
+  },
   "keywords": [
-    "web animation",
-    "animation callback",
-    "transition end",
-    "ontransitionend",
-    "onanimationend"
+    "css",
+    "animation",
+    "transition",
+    "transitionend",
+    "animationend",
+    "requestanimationframe",
+    "raf",
+    "timing",
+    "layout"
   ],
   "scripts": {
-    "build": "webpack --mode development",
-    "build-min": "webpack --mode production --config webpack.prod.js",
-    "build-watch": "webpack --mode development --watch",
-    "test": "echo true",
-    "prepublish": "npm run build && npm run build-min"
+    "clean": "node -e \"try{require('fs').rmSync('dist',{recursive:true,force:true})}catch(e){}\"",
+    "build": "npm run clean && tsup",
+    "build-watch": "tsup --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck && npm run build",
+    "test": "echo \"No tests yet\"",
+    "prepack": "npm run build"
   },
   "devDependencies": {
-    "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.19.3",
-    "@babel/preset-env": "^7.19.4",
-    "@babel/preset-typescript": "^7.18.6",
-    "babel-loader": "^8.2.5",
-    "eslint": "^8.25.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "terser-webpack-plugin": "^5.3.6",
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^17.3.0",
+    "terser": "^5.46.0",
+    "tsup": "^8.5.1",
     "typescript": "^4.8.4",
-    "ts-loader": "^9.4.1",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.11.1"
+    "typescript-eslint": "^8.56.1"
   }
 }

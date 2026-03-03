@@ -1,13 +1,27 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "baseUrl": "src",
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "jsx": "react",
-    "allowJs": false,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": "./src",
+
+    "target": "ES2018",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "declaration": true
-  }
+    "lib": ["ES2018", "DOM"],
+
+    "strict": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noEmitOnError": true,
+
+    "allowJs": false,
+    "jsx": "react"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["dist", "node_modules"]
 }
