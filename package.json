@@ -1,6 +1,6 @@
 {
   "name": "@rcaferati/wac",
-  "version": "1.2.1",
+  "version": "1.2.0",
   "description": "Tiny JavaScript utility for CSS transitionend/animationend callbacks and frame/layout timing helpers.",
   "repository": {
     "type": "git",
